@@ -1,6 +1,6 @@
-#include <stdint.h>
+#pragma once
 
-#include "utils/new.h"
+#include <stdint.h>
 
 namespace kernel::vga
 {

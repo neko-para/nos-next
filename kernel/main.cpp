@@ -1,5 +1,5 @@
-#include "lib/io.h"
-#include "lib/vga.h"
+#include "lib/io.hpp"
+#include "lib/vga.hpp"
 
 extern "C" void kernel_main(void)
 {

@@ -37,19 +37,19 @@
 
 {
   "directory": "/home/ubuntu/data/nos/build/kernel",
-  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/io.h",
-  "file": "/home/ubuntu/data/nos/kernel/lib/io.h"
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/io.hpp",
+  "file": "/home/ubuntu/data/nos/kernel/lib/io.hpp"
 },
 
 {
   "directory": "/home/ubuntu/data/nos/build/kernel",
-  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/vga.h",
-  "file": "/home/ubuntu/data/nos/kernel/lib/vga.h"
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/vga.hpp",
+  "file": "/home/ubuntu/data/nos/kernel/lib/vga.hpp"
 },
 
 {
   "directory": "/home/ubuntu/data/nos/build/kernel",
-  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/utils/new.h",
-  "file": "/home/ubuntu/data/nos/kernel/utils/new.h"
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/new.hpp",
+  "file": "/home/ubuntu/data/nos/kernel/lib/new.hpp"
 }
 ]

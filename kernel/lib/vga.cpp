@@ -1,6 +1,8 @@
-#include "lib/vga.h"
+#include "lib/vga.hpp"
 
 #include <printf/printf.h>
+
+#include "lib/new.hpp"
 
 namespace kernel::vga
 {
