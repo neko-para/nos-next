@@ -1,0 +1,55 @@
+[
+{
+  "directory": "/home/ubuntu/data/nos/build/third_party",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-gcc -DPRINTF_INCLUDE_CONFIG_H -I/home/ubuntu/data/nos/third_party/config -ffreestanding -g -o CMakeFiles/printf.dir/printf/printf.c.obj -c /home/ubuntu/data/nos/third_party/printf/printf.c",
+  "file": "/home/ubuntu/data/nos/third_party/printf/printf.c"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/kernel",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -o CMakeFiles/kernel.dir/main.cpp.obj -c /home/ubuntu/data/nos/kernel/main.cpp",
+  "file": "/home/ubuntu/data/nos/kernel/main.cpp"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/kernel",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -o CMakeFiles/kernel.dir/lib/vga.cpp.obj -c /home/ubuntu/data/nos/kernel/lib/vga.cpp",
+  "file": "/home/ubuntu/data/nos/kernel/lib/vga.cpp"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/kernel",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -o CMakeFiles/kernel.dir/lib/io.cpp.obj -c /home/ubuntu/data/nos/kernel/lib/io.cpp",
+  "file": "/home/ubuntu/data/nos/kernel/lib/io.cpp"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/third_party",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-gcc -DPRINTF_INCLUDE_CONFIG_H -I/home/ubuntu/data/nos/third_party/config -ffreestanding -g -c /home/ubuntu/data/nos/third_party/printf/printf.h",
+  "file": "/home/ubuntu/data/nos/third_party/printf/printf.h"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/third_party",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-gcc -DPRINTF_INCLUDE_CONFIG_H -I/home/ubuntu/data/nos/third_party/config -ffreestanding -g -c /home/ubuntu/data/nos/third_party/config/printf_config.h",
+  "file": "/home/ubuntu/data/nos/third_party/config/printf_config.h"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/kernel",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/io.h",
+  "file": "/home/ubuntu/data/nos/kernel/lib/io.h"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/kernel",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/lib/vga.h",
+  "file": "/home/ubuntu/data/nos/kernel/lib/vga.h"
+},
+
+{
+  "directory": "/home/ubuntu/data/nos/build/kernel",
+  "command": "/home/ubuntu/data/x-tools/i386-unknown-elf/bin/i386-unknown-elf-g++ -I/home/ubuntu/data/nos/kernel/. -I/home/ubuntu/data/nos/third_party -ffreestanding -g -std=gnu++20 -c /home/ubuntu/data/nos/kernel/utils/new.h",
+  "file": "/home/ubuntu/data/nos/kernel/utils/new.h"
+}
+]
