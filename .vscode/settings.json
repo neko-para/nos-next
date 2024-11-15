@@ -1,6 +1,6 @@
 {
     "cmake.configureSettings": {
-        "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain/toolchain.cmake"
+        "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain/i386-elf.cmake"
     },
     "editor.formatOnSave": true
 }

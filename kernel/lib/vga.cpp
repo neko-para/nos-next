@@ -72,3 +72,8 @@ void print(const char* format, ...)
 }
 
 }
+
+void putchar_(char c)
+{
+    kernel::vga::put(c);
+}

@@ -1,4 +1,4 @@
 .cache
 build
 compile_commands.json
-toolchain/toolchain.cmake
+toolchain/location.cmake
