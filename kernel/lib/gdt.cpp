@@ -38,7 +38,7 @@ void init()
     gdtr.limit = sizeof(gdtData) - 1;
     gdtr.base = reinterpret_cast<uint32_t>(gdtData);
 
-    asm volatile("lgdt (%0)" : : "r"(&gdtr) : "memory");
+    asm volatile("lgdt %0" ::"m"(gdtr));
 
     asm volatile(
         "ljmp $0x08, $1f\n"

@@ -1,6 +1,8 @@
 #include "lib/alloc.hpp"
 
+#include "lib/boot.hpp"
 #include "lib/io.hpp"
+#include "lib/vga.hpp"
 
 namespace kernel::alloc
 {
@@ -135,11 +137,31 @@ void Allocator::free(void* ptr)
 }
 
 static Allocator allocator;
-static char pool[1 << 20];
 
 void init()
 {
-    allocator.insert(pool);
+    auto info = bootInfo;
+
+    for (uint32_t i = 0; i < info->mmap_length / sizeof(kernel::boot::MMapEntry); i++) {
+        kernel::boot::MMapEntry* me = info->mmap_addr + i;
+        if (me->addr_hi || me->len_hi) {
+            continue;
+        }
+        if (me->type == 1 && me->addr_lo > 0) { // skip first
+            if (me->addr_lo == 0x100000) {
+                vga::print("%u ~ %u, %u\n", me->addr_lo, me->addr_lo + me->len_lo, me->len_lo);
+
+                // acually always one hole
+                // use &image_size ~ 1M as small heap, 1M ~ 16M as frame heap, 16M ~ 1G as pages.
+                uint32_t size = (uint32_t)&imageSize;
+                me->addr_lo = (size + 0xFFF) & (~0xFFF);
+                allocator.insert({ me->addr_lo, 0x1000000 - me->addr_lo });
+                // 1M - 16M as frame
+                // Frame::init(0x1000000, (me->len_lo - 0xF00000) >> 12);
+                // Page::init(me->len_lo + 0x100000);
+            }
+        }
+    }
 }
 
 }

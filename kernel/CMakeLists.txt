@@ -18,13 +18,16 @@ execute_process(
 execute_process(
     COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=crtend.o OUTPUT_VARIABLE CRTEND_O OUTPUT_STRIP_TRAILING_WHITESPACE
 )
+execute_process(
+    COMMAND ${CMAKE_CXX_COMPILER} --print-libgcc OUTPUT_VARIABLE LIBGCC_A OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 
 compile_asm(${CMAKE_CURRENT_LIST_DIR}/boot/boot.s BOOT_O)
 compile_asm(${CMAKE_CURRENT_LIST_DIR}/boot/crti.s CRTI_O)
 compile_asm(${CMAKE_CURRENT_LIST_DIR}/boot/crtn.s CRTN_O)
 add_custom_target(kernel_crt DEPENDS ${BOOT_O} ${CRTI_O} ${CRTN_O})
 
-set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_COMPILER} -o <TARGET> ${BOOT_O} ${CRTI_O} ${CRTBEGIN_O} <OBJECTS> <LINK_LIBRARIES> -lgcc ${CRTEND_O} ${CRTN_O} ${CMAKE_EXE_LINKER_FLAGS}")
+set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_COMPILER} -o <TARGET> ${BOOT_O} ${CRTI_O} ${CRTBEGIN_O} <OBJECTS> <LINK_LIBRARIES> ${LIBGCC_A} ${CRTEND_O} ${CRTN_O} ${CMAKE_EXE_LINKER_FLAGS}")
 
 add_executable(kernel
     main.cpp
@@ -32,6 +35,8 @@ add_executable(kernel
     lib/io.cpp
     lib/alloc.cpp
     lib/gdt.cpp
+    lib/idt.cpp
+    lib/isr.cpp
 )
 
 add_dependencies(kernel kernel_crt)
@@ -39,3 +44,5 @@ add_dependencies(kernel kernel_crt)
 target_include_directories(kernel PRIVATE .)
 
 target_link_libraries(kernel PRIVATE printf)
+
+set_source_files_properties(lib/isr.cpp PROPERTIES COMPILE_FLAGS -mgeneral-regs-only)
