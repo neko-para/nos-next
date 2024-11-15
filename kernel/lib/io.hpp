@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stddef.h>
 #include <stdint.h>
 
 namespace kernel::io
@@ -18,5 +19,8 @@ inline uint8_t inb(uint16_t port)
 }
 
 void kprint(const char* format, ...) __attribute__((format(printf, 1, 2)));
+void kfatal(const char* file, size_t line, const char* format, ...) __attribute__((format(printf, 3, 4))) __attribute__((noreturn));
 
 }
+
+#define KFatal(format, ...) kernel::io::kfatal(__FILE__, __LINE__, format, ##__VA_ARGS__)

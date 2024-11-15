@@ -2,5 +2,9 @@
     "cmake.configureSettings": {
         "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain/i386-elf.cmake"
     },
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "clangd.arguments": [
+        "--query-driver=${workspaceFolder}/toolchain/i386-elf/bin/i386-elf-g++"
+    ],
+    "clangd.path": "clangd-18"
 }

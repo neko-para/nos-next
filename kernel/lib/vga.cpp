@@ -2,7 +2,7 @@
 
 #include <printf/printf.h>
 
-#include "lib/new.hpp"
+#include <new>
 
 namespace kernel::vga
 {

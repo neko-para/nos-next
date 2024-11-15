@@ -1,4 +1,4 @@
 .cache
 build
 compile_commands.json
-toolchain/location.cmake
+toolchain/i386-elf
