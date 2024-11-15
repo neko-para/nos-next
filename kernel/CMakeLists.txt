@@ -31,6 +31,7 @@ add_executable(kernel
     lib/vga.cpp
     lib/io.cpp
     lib/alloc.cpp
+    lib/gdt.cpp
 )
 
 add_dependencies(kernel kernel_crt)
