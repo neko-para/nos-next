@@ -37,6 +37,7 @@ add_executable(kernel
     lib/gdt.cpp
     lib/idt.cpp
     lib/isr.cpp
+    lib/keyboard.cpp
 )
 
 add_dependencies(kernel kernel_crt)

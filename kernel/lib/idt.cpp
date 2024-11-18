@@ -75,6 +75,9 @@ void init()
         idt[i].set(kernel::isr::isrHandler[i], Idt::A_PRESENT | Idt::A_GATE_INT_32 | Idt::A_DPL_0);
     }
 
+    idt[32].set(kernel::isr::isrHandler32, Idt::A_PRESENT | Idt::A_GATE_INT_32 | Idt::A_DPL_0);
+    idt[33].set(kernel::isr::isrHandler33, Idt::A_PRESENT | Idt::A_GATE_INT_32 | Idt::A_DPL_0);
+
     asm volatile("lidt %0" ::"m"(idtr));
 }
 
