@@ -31,6 +31,7 @@ set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_COMPILER} -o <TARGET> ${BOOT_O} ${CRT
 
 add_executable(kernel
     main.cpp
+
     lib/vga.cpp
     lib/io.cpp
     lib/alloc.cpp
@@ -38,6 +39,8 @@ add_executable(kernel
     lib/idt.cpp
     lib/isr.cpp
     lib/keyboard.cpp
+    lib/timer.cpp
+
     std/string.cpp
     std/icxxabi.cpp
 )

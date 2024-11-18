@@ -3,6 +3,7 @@
 #include "lib/idt.hpp"
 #include "lib/io.hpp"
 #include "lib/keyboard.hpp"
+#include "lib/timer.hpp"
 
 namespace kernel::isr
 {
@@ -35,6 +36,7 @@ __attribute__((interrupt)) void handlerNoError(kernel::idt::InterruptFrame*)
 __attribute__((interrupt)) void handler32(kernel::idt::InterruptFrame*)
 {
     kernel::idt::end(0);
+    kernel::timer::hit();
 }
 
 __attribute__((interrupt)) void handler33(kernel::idt::InterruptFrame*)

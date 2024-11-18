@@ -4,6 +4,7 @@
 #include "lib/idt.hpp"
 #include "lib/io.hpp"
 #include "lib/keyboard.hpp"
+#include "lib/timer.hpp"
 #include "lib/vga.hpp"
 
 #include <stddef.h>
@@ -15,6 +16,7 @@ extern "C" void kernel_main(void)
     kernel::alloc::init();
 
     kernel::keyboard::init();
+    kernel::timer::init();
 
     kernel::idt::unmask(1);
 
