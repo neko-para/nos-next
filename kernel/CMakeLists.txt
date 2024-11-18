@@ -40,6 +40,8 @@ add_executable(kernel
     lib/isr.cpp
     lib/keyboard.cpp
     lib/timer.cpp
+    lib/task.cpp
+    lib/task.s
 
     std/string.cpp
     std/icxxabi.cpp

@@ -2,6 +2,8 @@
 
 #include <new>
 
+kernel::gdt::Tss tss;
+
 namespace kernel::gdt
 {
 
@@ -11,7 +13,6 @@ struct Gdtr
     uint32_t base;
 } __attribute__((packed));
 
-static Tss tss;
 static uint8_t gdtData[sizeof(Gdt) * 6];
 static Gdtr gdtr;
 
