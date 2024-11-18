@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "lib/cpp.hpp"
 #include "lib/pool.hpp"
 
 namespace kernel::alloc
@@ -71,6 +72,33 @@ struct Allocator
         insert(Range { reinterpret_cast<uintptr_t>(data), N });
     }
 };
+
+struct FrameAllocator
+{
+    constexpr static size_t frameSize = 1 << 12;
+
+    struct Frame
+    {
+        uint8_t data[frameSize];
+    };
+
+    std::vector<bool> bitmap;
+    Frame* baseFrame;
+
+    void init(uint32_t base, uint32_t count);
+    void* alloc(size_t skip = 0);
+    void free(void* ptr);
+
+    // 128MB
+    void* allocUpper(uint32_t upperBase = 1 << 27)
+    {
+        auto skip = (upperBase - reinterpret_cast<uint32_t>(baseFrame)) / frameSize;
+        return alloc(skip);
+    }
+};
+
+extern Allocator allocator;
+extern FrameAllocator frameAllocator;
 
 void init();
 

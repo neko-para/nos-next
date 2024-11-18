@@ -38,6 +38,8 @@ add_executable(kernel
     lib/idt.cpp
     lib/isr.cpp
     lib/keyboard.cpp
+    std/string.cpp
+    std/icxxabi.cpp
 )
 
 add_dependencies(kernel kernel_crt)

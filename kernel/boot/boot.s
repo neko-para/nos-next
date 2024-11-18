@@ -29,8 +29,14 @@ bootInfo:
 _start:
     mov $stack_top, %esp
     mov %ebx, (bootInfo)
+
     call _init
+
     call kernel_main
+
+    push $0
+    call __cxa_finalize
+
     cli
 1:
     hlt

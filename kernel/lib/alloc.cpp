@@ -136,7 +136,41 @@ void Allocator::free(void* ptr)
     insert({ reinterpret_cast<uintptr_t>(ptr) - 4, size });
 }
 
-static Allocator allocator;
+void FrameAllocator::init(uint32_t base, uint32_t count)
+{
+    if (base & (frameSize - 1)) {
+        KFatal("error: frame alloc: base not aligned");
+    }
+    baseFrame = reinterpret_cast<Frame*>(base);
+    bitmap.clear();
+    bitmap.resize(count, false);
+}
+
+void* FrameAllocator::alloc(size_t skip)
+{
+    for (auto it = bitmap.begin() + skip; it != bitmap.end(); it++) {
+        if (!(*it)) {
+            *it = true;
+            return baseFrame + (it - bitmap.begin());
+        }
+    }
+    KFatal("error: frame alloc: no frame");
+}
+
+void FrameAllocator::free(void* ptr)
+{
+    if (reinterpret_cast<uint32_t>(ptr) & (frameSize - 1)) {
+        KFatal("error: frame alloc: free ptr not aligned");
+    }
+    auto diff = static_cast<Frame*>(ptr) - baseFrame;
+    if (diff < 0 || diff >= bitmap.size()) {
+        KFatal("error: frame alloc: free ptr out of range");
+    }
+    bitmap[diff] = false;
+}
+
+Allocator allocator;
+FrameAllocator frameAllocator;
 
 void init()
 {
@@ -151,13 +185,17 @@ void init()
             if (me->addr_lo == 0x100000) {
                 vga::print("%u ~ %u, %u\n", me->addr_lo, me->addr_lo + me->len_lo, me->len_lo);
 
+                uint32_t low = me->addr_lo;
+                uint32_t upp = me->addr_lo + me->len_lo;
+                uint32_t heapFrameSep = 1 << 24; // 1M
+
                 // acually always one hole
-                // use &image_size ~ 1M as small heap, 1M ~ 16M as frame heap, 16M ~ 1G as pages.
+                // use &image_size ~ 1M as small heap, 1M+ as frame heap, 16M ~ 1G as pages.
                 uint32_t size = (uint32_t)&imageSize;
-                me->addr_lo = (size + 0xFFF) & (~0xFFF);
-                allocator.insert({ me->addr_lo, 0x1000000 - me->addr_lo });
-                // 1M - 16M as frame
-                // Frame::init(0x1000000, (me->len_lo - 0xF00000) >> 12);
+                low = (size + 0xFFF) & (~0xFFF);
+
+                allocator.insert({ low, heapFrameSep - low });
+                frameAllocator.init(heapFrameSep, (upp - heapFrameSep) / FrameAllocator::frameSize);
                 // Page::init(me->len_lo + 0x100000);
             }
         }
