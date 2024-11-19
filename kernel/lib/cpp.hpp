@@ -14,6 +14,6 @@ __DECLARE_THROW(__throw_length_error)
 
 #define _REQUIRES_FREESTANDING_H
 
-// #include <algorithm> // IWYU pragma: export
-#include <list>   // IWYU pragma: export
-#include <vector> // IWYU pragma: export
+#include <algorithm> // IWYU pragma: export
+#include <list>      // IWYU pragma: export
+#include <vector>    // IWYU pragma: export

@@ -54,7 +54,7 @@ void init()
         :
         : "ax");
 
-    // asm volatile ( "movw $0x28, %ax; ltr %ax;" );
+    asm volatile("movw $0x28, %ax; ltr %ax;");
 }
 
 }

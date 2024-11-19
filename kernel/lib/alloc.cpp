@@ -2,6 +2,7 @@
 
 #include "lib/boot.hpp"
 #include "lib/io.hpp"
+#include "lib/page.hpp"
 #include "lib/vga.hpp"
 
 namespace kernel::alloc
@@ -196,7 +197,7 @@ void init()
 
                 allocator.insert({ low, heapFrameSep - low });
                 frameAllocator.init(heapFrameSep, (upp - heapFrameSep) / FrameAllocator::frameSize);
-                // Page::init(me->len_lo + 0x100000);
+                kernel::page::init(upp);
             }
         }
     }
