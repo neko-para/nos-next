@@ -1,5 +1,6 @@
 #include "lib/timer.hpp"
 #include "lib/io.hpp"
+#include "lib/task.hpp"
 #include "lib/vga.hpp"
 
 namespace kernel::timer
@@ -22,6 +23,8 @@ void init(uint32_t hz)
 void hit()
 {
     msSinceBoot += 1;
+
+    kernel::task::hit();
 
     if (msSinceBoot % 1000 == 0) {
         vga::print(".");

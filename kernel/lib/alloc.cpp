@@ -27,7 +27,7 @@ void Allocator::insert(Range range)
                 usable->next = node;
                 *node = { range, nullptr };
             }
-            else if (usable->isAwayLeftOf(range)) {
+            else if (usable->isAwayRightOf(range)) {
                 *node = { range, usable };
                 usable = node;
             }
@@ -50,9 +50,6 @@ void Allocator::insert(Range range)
             auto right = usable->next;
 
             while (right) {
-                if (!left->isAwayLeftOf(range)) {
-                    KFatal("error: alloc: occupied insert detected");
-                }
                 if (left->isLeftOf(range)) {
                     left->mergeRight(range);
                     if (left->isLeftOf(*right)) {
@@ -61,6 +58,9 @@ void Allocator::insert(Range range)
                         pool.release(right);
                     }
                     return;
+                }
+                else if (!left->isAwayLeftOf(range)) {
+                    KFatal("error: alloc: occupied insert detected");
                 }
                 else if (right->isRightOf(range)) {
                     right->mergeLeft(range);
@@ -134,7 +134,7 @@ void Allocator::free(void* ptr)
     if ((tail ^ size) != magic) {
         KFatal("error: alloc: free magic error");
     }
-    insert({ reinterpret_cast<uintptr_t>(ptr) - 4, size });
+    insert({ reinterpret_cast<uintptr_t>(uptr), size });
 }
 
 void FrameAllocator::init(uint32_t base, uint32_t count)
