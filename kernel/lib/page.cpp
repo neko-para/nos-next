@@ -17,6 +17,8 @@ void PageDirectory::freeTables()
 
 PageDirectory* flatPage;
 
+// PageDirectory* upperPage;
+
 void init(uint32_t maxiAddr)
 {
     flatPage = new (alloc::frameAllocator.alloc()) PageDirectory();
@@ -28,6 +30,18 @@ void init(uint32_t maxiAddr)
         }
         flatPage->directory[i] = { READWRITE | PRESENT, table };
     }
+
+    // upperPage = new (alloc::frameAllocator.alloc()) PageDirectory();
+    // for (uint32_t i = 0; i < 256; i++) {
+    //     auto tableLow = new (alloc::frameAllocator.alloc()) PageTable();
+    //     auto tableHigh = new (alloc::frameAllocator.alloc()) PageTable();
+    //     for (uint32_t j = 0; j < 1024; j++) {
+    //         tableLow->directory[j] = { READWRITE | PRESENT, j, i };
+    //         tableHigh->directory[j] = { READWRITE | PRESENT, j, i };
+    //     }
+    //     upperPage->directory[i] = { READWRITE | PRESENT, tableLow };
+    //     upperPage->directory[i + 512] = { READWRITE | PRESENT, tableLow };
+    // }
 
     flatPage->load();
     enable();
