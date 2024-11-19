@@ -5,6 +5,14 @@
 namespace kernel::task
 {
 
+enum
+{
+    Pending,
+
+    Running,
+    Blocked,
+};
+
 struct ControlBlock
 {
     uint32_t esp;
@@ -14,6 +22,10 @@ struct ControlBlock
     ControlBlock* next;
 };
 
-void init();
+void init(ControlBlock* initTask);
+ControlBlock* make_kernel_task(void (*entry)(uint32_t param), uint32_t cr3, uint32_t param);
 
 }
+
+extern "C" void switchToTask(kernel::task::ControlBlock* target);
+extern kernel::task::ControlBlock* currentTask;
