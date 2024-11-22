@@ -36,6 +36,9 @@ struct ControlBlock
     };
 };
 
+void lock_schedule();
+void unlock_schedule();
+
 void init_yield();
 ControlBlock* make_kernel_task(void (*entry)(uint32_t param), uint32_t cr3, uint32_t param, const char* name = "untitled");
 

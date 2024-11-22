@@ -21,6 +21,7 @@ void lock_schedule()
 {
     asm volatile("cli");
     lockScheduleCounter++;
+    io::kprint("lock   %d\n", lockScheduleCounter);
 }
 
 void unlock_schedule()
@@ -29,6 +30,7 @@ void unlock_schedule()
     if (!lockScheduleCounter) {
         asm volatile("sti");
     }
+    io::kprint("unlock %d\n", lockScheduleCounter);
 }
 
 struct ScheduleLockGuard
@@ -69,7 +71,11 @@ void init_yield()
     self.state = Running;
     currentTask = &self;
 
+    lock_schedule();
+
     switchToTask(readyTask.pop_front());
+
+    KFatal("Quit");
 }
 
 void append_task(ControlBlock* task)
@@ -81,9 +87,9 @@ void append_task(ControlBlock* task)
 
 void schedule()
 {
-    ScheduleLockGuard guard;
-
     if (!readyTask.empty()) {
+        dump_ready();
+
         auto next = readyTask.pop_front();
 
         if (currentTask->state == Running) {
@@ -130,6 +136,7 @@ void unblock(ControlBlock* task)
 
 void sleep(uint32_t ms)
 {
+    currentTask->block_reason = BlockReason_Sleep;
     currentTask->sleep = timer::msSinceBoot + ms;
     block(currentTask);
 }
